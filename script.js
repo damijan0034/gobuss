@@ -41,12 +41,11 @@ navarrow.onclick = () => {
 
 let startX = null;
 const minSwipe = 60;
-const body = document.body;
 
 document.addEventListener('touchstart', (e) => {
   const x = e.touches[0].clientX;
 
-  // swipe SAMO sa desne ivice
+  // swipe samo sa desne ivice
   if (x > window.innerWidth - 30) {
     startX = x;
   } else {
@@ -61,17 +60,10 @@ document.addEventListener('touchend', (e) => {
   const diff = startX - endX;
 
   if (diff > minSwipe) {
-    body.classList.add('menuopen');
+    all.classList.add('menu-open');
   }
 
   if (diff < -minSwipe) {
-    body.classList.remove('menuopen');
+    all.classList.remove('menu-open');
   }
 });
-
-// spreči scroll dok je meni otvoren
-document.addEventListener('touchmove', (e) => {
-  if (body.classList.contains('menuopen')) {
-    e.preventDefault();
-  }
-}, { passive: false });
