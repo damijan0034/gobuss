@@ -39,37 +39,39 @@ navarrow.onclick = () => {
 }
 
 
-let startX = 0;
-let endX = 0;
-const minSwipeDistance = 60; // px
-
+let startX = null;
+const minSwipe = 60;
 const body = document.body;
 
 document.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
+  const x = e.touches[0].clientX;
+
+  // swipe SAMO sa desne ivice
+  if (x > window.innerWidth - 30) {
+    startX = x;
+  } else {
+    startX = null;
+  }
 });
 
 document.addEventListener('touchend', (e) => {
-  endX = e.changedTouches[0].clientX;
-  handleSwipe();
-});
+  if (startX === null) return;
 
-function handleSwipe() {
+  const endX = e.changedTouches[0].clientX;
   const diff = startX - endX;
 
-  // Swipe s desna ka levo → otvori meni
-  if (diff > minSwipeDistance) {
+  if (diff > minSwipe) {
     body.classList.add('menuopen');
   }
 
-  // Swipe s leva ka desno → zatvori meni
-  if (diff < -minSwipeDistance) {
+  if (diff < -minSwipe) {
     body.classList.remove('menuopen');
   }
-}
+});
 
-
-
-
-
-
+// spreči scroll dok je meni otvoren
+document.addEventListener('touchmove', (e) => {
+  if (body.classList.contains('menuopen')) {
+    e.preventDefault();
+  }
+}, { passive: false });
