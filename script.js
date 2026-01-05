@@ -39,31 +39,3 @@ navarrow.onclick = () => {
 }
 
 
-let startX = null;
-const minSwipe = 60;
-
-document.addEventListener('touchstart', (e) => {
-  const x = e.touches[0].clientX;
-
-  // swipe samo sa desne ivice
-  if (x > window.innerWidth - 30) {
-    startX = x;
-  } else {
-    startX = null;
-  }
-});
-
-document.addEventListener('touchend', (e) => {
-  if (startX === null) return;
-
-  const endX = e.changedTouches[0].clientX;
-  const diff = startX - endX;
-
-  if (diff > minSwipe) {
-    all.classList.add('menu-open');
-  }
-
-  if (diff < -minSwipe) {
-    all.classList.remove('menu-open');
-  }
-});
