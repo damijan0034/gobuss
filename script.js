@@ -39,13 +39,6 @@ navarrow.onclick = () => {
 }
 
 
-
-
-
-
-
-
-
 let startX = 0;
 let endX = 0;
 const minSwipeDistance = 60; // px
@@ -74,3 +67,9 @@ function handleSwipe() {
     body.classList.remove('menuopen');
   }
 }
+
+
+
+
+
+
